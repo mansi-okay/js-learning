@@ -1,0 +1,91 @@
+JavaScript Execution Model
+
+JavaScript executes code using execution contexts. 
+An execution context is an abstract environment in which JavaScript code is evaluated and executed.
+
+When a JavaScript program starts, the engine creates a Global Execution Context (GEC). 
+This is the default execution context and it is created only once.
+
+1. Global Execution Context (GEC)
+The Global Execution Context is created when the program begins execution.
+
+It contains:
+-> The global object
+    -> window object in browser environment
+    -> global / empty object in Node.js environment
+->The value of the this keyword
+->Global variables and function declarations
+
+The Global Execution Context is the first context pushed onto the Call Stack.
+
+
+2. Phases of an Execution Context
+Every execution context (global or function) goes through two phases:
+
+Phase 1: Creation Phase (Memory Phase)
+During this phase, the JavaScript engine scans the code and allocates memory.
+
+Actions performed:
+-> var variables are initialized with undefined
+-> let and const variables are allocated memory but not initialized (Temporal Dead Zone)
+-> Function declarations are stored with their complete function definitions
+-> Scope chain is established
+-> The value of this keyword is determined
+
+No code is executed during this phase.
+
+Phase 2: Execution Phase
+During this phase:
+-> JavaScript executes code line by line
+-> Variables are assigned their actual values
+-> Function calls are executed
+
+When a function is invoked, execution pauses in the current context and a new execution context is created for the function.
+
+
+3. Function Execution Context (FEC)
+A Function Execution Context is created whenever a function is called.
+
+Each Function Execution Context has:
+-> Its own variable environment
+-> Its own lexical environment
+-> Its own this keyword
+
+Just like the Global Execution Context, a Function Execution Context also goes through:
+-> Creation Phase
+-> Execution Phase
+
+JavaScript remains single-threaded. No new thread is created when a function is called.
+
+
+4. Call Stack
+The Call Stack is a data structure used to manage execution contexts.
+
+Rules:
+-> Global Execution Context is pushed first
+-> Each function call pushes a new execution context onto the stack
+-> When a function finishes execution, its execution context is popped from the stack
+
+Example flow:
+-> Global Execution Context
+-> Function Execution Context is added
+-> Function Execution Context is removed after execution
+-> Control returns to the calling context
+
+
+5. Return Value and Context Removal
+When a function completes execution:
+-> The return value is passed back to the parent execution context
+-> The Function Execution Context is removed from the Call Stack
+-> Memory used by the function becomes eligible for garbage collection
+
+Execution then continues in the calling context.
+
+
+6. Key Points
+-> JavaScript is single-threaded
+-> Execution is handled using execution contexts
+-> Each execution context has two phases: Creation and Execution
+-> Functions create new execution contexts
+-> Execution contexts are managed using the Call Stack
+-> Function execution contexts are temporary and removed after execution
