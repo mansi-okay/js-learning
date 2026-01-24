@@ -1,5 +1,7 @@
 // Object literals
 
+// objects can have only string or symbol as keys
+
 const sym1 = Symbol("key")
 const sym2 = Symbol("key")
 
@@ -12,6 +14,7 @@ const user = {
     recentOrders: ["Order#101", "Order#205", "Order#309"]
 }
 user[sym2] = "KeyTwo"
+user[{a:1}] = "object";   // key becomes string as '[object Object]'
 
 
 // console.log(user.email);
@@ -27,7 +30,7 @@ user[sym2] = "KeyTwo"
 // user.email = "mansiag@gmail.com"
 // Object.freeze(user)
 // user.email = "mansi@gmail.com"
-// console.log(user);
+//console.log(user);
 
 
 // "this" refers to the object that is currently being created or used
