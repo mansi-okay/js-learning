@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Button clicked </button>
+</body>
+<script>
+
+//call executes the function immediately,
+// bind returns a new function to be executed later with this fixed.
+
+    class React {
+        constructor(){
+            this.library = "React"
+            this.server = "https://localhost:3000"
+
+            //requirement
+            document
+                .querySelector('button')
+                .addEventListener('click', this.handleClick.bind(this))
+// bind created a version] of handleClick where this is always the current React object
+// without bind this(inside handleClick) === buttonElement
+        }
+        handleClick(){
+            console.log("button clicked");
+            console.log(this);
+        }
+    }
+
+    const app = new React()
+</script>
+</html>
